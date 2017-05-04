@@ -1,2 +1,2 @@
 # BookReaper
-A web application to buy and read books online using NodeJS and MongoDB 
+A web application that provides the features of an online bookstore with some additional features.

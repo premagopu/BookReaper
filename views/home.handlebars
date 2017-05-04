@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="jumbotron">
+                <h1>BookReaper</h1>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <p>Search Books</p>
+                        </div>
+                        <div class="item">
+                            <p>Buy Books</p>
+                        </div>
+                        <div class="item">
+                            <p>Read Books</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                {{#if errors}}
+                    {{#each errors}}
+                        <div class="alert alert-danger" style="display: inline">{{msg}}</div>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#login" aria-controls="home" role="tab" data-toggle="tab">Login</a></li>
+                <li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">SignUp</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="login">
+
+                    <form method="post" action="/login">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="register">
+                    {{#if errors}}
+                        {{#each errors}}
+                            <div class="alert alert-danger">{{msg}}</div>
+                        {{/each}}
+                    {{/if}}
+                    <form method="post" action="/register">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="password2">
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
