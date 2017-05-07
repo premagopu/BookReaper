@@ -1,1 +1,121 @@
-Shop
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bookreaper-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">BookReaper</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bookreaper-navbar">
+
+                <ul class="nav navbar-nav navbar-left">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="category">By Title <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li onclick="changeCategory('By Title')"><a href="#">By Title</a></li>
+                            <li onclick="changeCategory('By Author')"><a href="#">By Author</a></li>
+                            <li onclick="changeCategory('By Publisher')"><a href="#">By Publisher</a></li>
+                            <li onclick="changeCategory('By ISBN')"><a href="#">By ISBN</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form class="navbar-form navbar-left" id="searchForm" onsubmit="callSearch();return false;">
+                    <div class="form-group has-feedback has-feedback-right">
+
+                        <input type="text" class="form-control" placeholder="Search" id="searchKeyword">
+                        <i class="form-control-feedback glyphicon glyphicon-search"></i>
+                    </div>
+
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" class="glyphicon glyphicon-info-sign"></a></li>
+                    <li><a href="#" class="glyphicon glyphicon-shopping-cart"></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Acount</a></li>
+                            <li><a href="#">Orders</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+        <div class="row vdivide">
+            <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li onclick="submitFilter('Horror');"><a href="#">Horror</a></li>
+                            <li onclick="submitFilter('Thriller');"><a href="#">Thriller</a></li>
+                            <li onclick="submitFilter('Romantic');"><a href="#">Romantic</a></li>
+                            <li onclick="submitFilter('Comedy');"><a href="#">Comedy</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/">All</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ratings <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">1</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                {{#each books}}
+                    <div class="col-lg-3">
+                        <div class="container-book">
+                            <a href="/{{isbn}}">
+                                <div class="book-title"><h4>{{title}}</h4></div>
+                                <div class="book-author"><h5>{{author}}</h5></div>
+                                <div class="book-thumbnail panel-body thumbnail" style="background-image: url('{{imagelink}}')">
+
+                                    <div class="panel-default-overlay-up">
+
+                                    </div>
+                                    <div class="caption-up">
+                                        <a class="btn btn-primary">Add to Cart</a>
+                                        <a class="btn btn-success">Read More</a>
+                                    </div>
+
+                                </div>
+                                <div class="book-price"><h5>$ {{price}}</h5></div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                {{/each}}
+                {{#if len}}
+                    <h2>Sorry! No results were found.</h2>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="hiddenForm">
+        <form method="post" action="/shop" id="filterForm">
+            <input type="text" id="filter" name="filter" value=""/>
+            <input type="text" id="criteria" name="criteria" value="title"/>
+        </form>
+    </div>
+</div>

@@ -6,11 +6,13 @@ var router = express.Router();
 var User = require('../modals/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+//var shopRoute = require('./shop');
 
 
 router.get('/', ensureAuthenticated, function(req, res){
-    console.log("Logged In")
-    res.render('shop');
+    console.log("Logged In");
+    //console.log(req.user._id);
+    res.redirect("/shop");
 });
 
 // Register
