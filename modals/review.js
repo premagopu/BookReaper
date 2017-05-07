@@ -2,7 +2,7 @@
  * Created by Suraj on 5/4/2017.
  */
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 var reviewSchema = Schema({
     comment:{
@@ -10,6 +10,10 @@ var reviewSchema = Schema({
     },
     rating:{
         type: Number
+    },
+    reviewBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        referenceBy: 'User'
     }
 });
 

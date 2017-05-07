@@ -1,0 +1,74 @@
+.row.vdivide [class*='col-']:not(:last-child):after {
+    background: #e0e0e0;
+    width: 1px;
+    content: "";
+    display:block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    min-height: 70px;
+}
+
+.container-book{
+
+    overflow: auto;
+    border: solid cadetblue 1px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(black,gray);
+    color: white !important;
+}
+
+.container-book:hover , .container-book>a:hover{
+    text-decoration: none !important;
+}
+
+.book-thumbnail{
+    align-self: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: solid black 1px;
+    height: 300px;
+}
+.book-title{
+    height: 29px;
+    overflow: hidden;
+    text-overflow-ellipsis: true;
+    white-space: nowrap;
+    color: white !important;
+}
+
+.book-title> h4{
+    text-overflow: ellipsis;
+    color: white !important;
+}
+
+.hiddenForm{
+    display: none;
+}
+
+.navbar{
+    position: fixed;
+    width: 100%;
+    left:0;
+    right: 0;
+    z-index: 1;
+}
+
+.row{
+    margin-top: 70px;
+}
+
+.book-author>h5, .book-price>h5{
+    color: white !important;
+}
+
+.panel-default-overlay-up{
+    opacity: 0.5;
+}
+.caption-up{
+    margin-left: 0 !important;
+}
