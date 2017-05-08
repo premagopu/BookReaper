@@ -6,6 +6,7 @@ var router = express.Router();
 var User = require('../modals/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Cart = require('../modals/cart');
 //var shopRoute = require('./shop');
 
 
@@ -55,10 +56,19 @@ router.post('/register', function(req, res){
             username: username,
             password: password
         });
-
+        var userinfo = "";
         User.createUser(newUser, function(err, user){
             if(err) throw err;
             console.log(user);
+            //userinfo = user;
+            var newCart = new Cart({
+                cartOf: user._id
+            });
+
+            Cart.addCart(newCart, function (err, cart) {
+                if(err)
+                    throw err;
+            });
         });
 
         req.flash('success_msg', 'You are registered and can now login');
@@ -100,7 +110,7 @@ passport.deserializeUser(function(id, done) {
 router.post('/login',
     passport.authenticate('local', {successRedirect:'/', failureRedirect:'/',failureFlash: true}),
     function(req, res) {
-        console.log("Logging In!");
+        console.log(req.user);
         res.redirect('/');
     });
 
@@ -108,8 +118,11 @@ router.get('/logout', function(req, res){
     req.logout();
 
     req.flash('success_msg', 'You are logged out');
-
-    res.redirect('/');
+    req.user = null;
+    req.session.destroy(function (err) {
+        if (err) throw err;
+        res.redirect('/');
+    });
 });
 
 

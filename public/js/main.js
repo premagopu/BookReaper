@@ -18,11 +18,19 @@ function changeCategory(category) {
 }
 
 function callSearch() {
-
     var keyword = document.getElementById("searchKeyword").value;
     var fil = document.getElementById("filter");
     var filform = document.getElementById("filterForm");
     fil.value = keyword;
     //alert(keyword);
     filform.submit();
+}
+
+function addToCart(id) {
+    var addtocartForm = document.getElementById("addtocartForm");
+    var bookId = document.getElementById("bookId");
+    var message = document.getElementById("alertMessage");
+    message.style.display = "block";
+    bookId.value = id;
+    addtocartForm.submit();
 }

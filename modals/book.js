@@ -41,7 +41,7 @@ module.exports.createBook = function (newBook, callback) {
 };
 
 module.exports.getBookByISBN = function (isbn, callback) {
-      var query = {ISBN : isbn};
+      var query = {isbn : isbn};
       Book.findOne(query,callback);
 };
 
@@ -66,7 +66,7 @@ module.exports.getBooksByPublisher = function (publisher, callback) {
 };
 
 module.exports.addReviewByISBN = function (isbn, newReview, callback) {
-    var query = {ISBN: isbn};
+    var query = {isbn: isbn};
     Book.findOne(query, callback).reviews.push(newReview);
 };
 

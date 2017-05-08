@@ -71,4 +71,21 @@
 }
 .caption-up{
     margin-left: 0 !important;
+    text-align: center;
+}
+
+.book-thumbnail-main{
+    align-self: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: solid black 1px;
+    height: 300px;
+}
+
+.alert-message{
+    position: fixed;
+    z-index: 1;
+    width: 80%;
+    text-align: center;
+    display: none;
 }
