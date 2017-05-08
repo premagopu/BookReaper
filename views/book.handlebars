@@ -54,7 +54,6 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
     <div class="container-fluid">
         <div class="row vdivide">
             <div class="col-sm-2">
@@ -86,33 +85,28 @@
                 <div class="alert alert-success alert-message" role="alert" id="alertMessage">
                     <strong>Added to Cart!</strong>
                 </div>
-                {{#each books}}
-                    <div class="col-lg-3">
-                        <div class="container-book">
-                            <a href="/book?isbn={{isbn}}">
-                                <div class="book-title"><h4>{{title}}</h4></div>
-                                <div class="book-author"><h5>{{author}}</h5></div>
-                                <div class="book-thumbnail panel-body thumbnail" style="background-image: url('{{imagelink}}')">
+                <div class="col-sm-3">
+                    <div class="book-thumbnail-main panel-body thumbnail" style="background-image: url('{{imagelink}}')">
 
-                                    <div class="panel-default-overlay-up">
+                        <div class="panel-default-overlay-up">
 
-                                    </div>
-                                    <div class="caption-up">
-                                        <a class="btn btn-primary" onclick="addToCart('{{_id}}')">Add to Cart</a>
-                                        <a href="/book?isbn={{isbn}}" class="btn btn-success">Read More</a>
-                                    </div>
+                        </div>
+                        <div class="caption-up">
+                            <a class="btn btn-primary" onclick="addToCart('{{_id}}')">Add to Cart</a>
+                            {{#if readOnline}}
+                                <a class="btn btn-success">Read Online</a>
+                            {{/if}}
 
-                                </div>
-                                <div class="book-price"><h5>$ {{price}}</h5></div>
-                            </a>
                         </div>
 
-
                     </div>
-                {{/each}}
-                {{#if len}}
-                    <h2>Sorry! No results were found.</h2>
-                {{/if}}
+                </div>
+                <div class="col-sm-9">
+                    <div class="book-title-main"><h4>{{title}}</h4></div>
+                    <div class="book-author-main"><h5>{{author}}</h5></div>
+                    <div class="book-price-main"><h5>$ {{price}}</h5></div>
+                </div>
+
             </div>
         </div>
     </div>
