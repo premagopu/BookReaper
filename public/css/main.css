@@ -89,3 +89,6 @@
     text-align: center;
     display: none;
 }
+.badgeRating{
+    float: right;
+}

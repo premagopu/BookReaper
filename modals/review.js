@@ -12,8 +12,7 @@ var reviewSchema = Schema({
         type: Number
     },
     reviewBy:{
-        type: mongoose.Schema.Types.ObjectId,
-        referenceBy: 'User'
+        type: String
     }
 });
 

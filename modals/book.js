@@ -29,9 +29,19 @@ var bookSchema = Schema({
         type: String
     },
     reviews:[{
-        type: mongoose.Schema.Types.ObjectId,
-        referenceBy: 'Review'
-    }]
+        comment:{
+            type: String
+        },
+        rating:{
+            type: Number
+        },
+        reviewBy:{
+            type: String
+        }
+    }],
+    totalRating:{
+        type: Number
+    }
 });
 
 var Book = module.exports = mongoose.model('Book', bookSchema);
@@ -60,6 +70,11 @@ module.exports.getBooksByGenre = function (genre, callback) {
     Book.find(query,callback);
 };
 
+module.exports.getBooksByRating = function (rating, callback) {
+    var query = {totalRating : rating};
+    Book.find(query,callback);
+};
+
 module.exports.getBooksByPublisher = function (publisher, callback) {
     var query = {publisher : publisher};
     Book.find(query,callback);
@@ -67,7 +82,22 @@ module.exports.getBooksByPublisher = function (publisher, callback) {
 
 module.exports.addReviewByISBN = function (isbn, newReview, callback) {
     var query = {isbn: isbn};
-    Book.findOne(query, callback).reviews.push(newReview);
+    //console.log(newReview);
+    Book.findOne(query, callback).exec(function (err, book) {
+        //console.log(book);
+        book.reviews.push(newReview);
+        book.save(function (err) {
+            if (!err){
+                Book.find({})
+                    .populate('reviews')
+                    .populate('reviews.comment')
+                    .populate('reviews.rating')
+                    .populate('reviews.reviewBy').exec(function (err, book) {
+                        //console.log(book);
+                })
+            }
+        }, callback);
+    });
 };
 
 module.exports.getBooks = function (callback) {
@@ -95,4 +125,8 @@ module.exports.getBooksByCriteria = function (criteria, keyword, callback) {
     }
     Book.find(query, callback);
 
+};
+
+module.exports.updateTotalRating = function (rating, isbn, callback) {
+    Book.update({"isbn":isbn},{$set:{ "totalRating": rating}},callback);
 };
