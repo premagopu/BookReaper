@@ -12,7 +12,7 @@ var cartCount = 0;
 
 router.get('/', ensureAuthenticated,function(req, res){
     console.log("Logged In");
-    console.log(req.user);
+    //console.log(req.user);
 
     var bookList = "";
 
@@ -20,7 +20,7 @@ router.get('/', ensureAuthenticated,function(req, res){
 
             req.cart = cart;
             cartMain = cart;
-            console.log(cart);
+            //console.log(cart);
 
     });
     //console.log("Items in cart=================="+cartMain.length);
@@ -28,7 +28,7 @@ router.get('/', ensureAuthenticated,function(req, res){
         if(err) throw err;
         //console.log(books);
         bookList = books;
-        console.log(bookList);
+        //console.log(bookList);
         var len = false;
         if (bookList.length == 0){
             len = true;
@@ -53,6 +53,7 @@ router.post('/createBook',function (req,res) {
     var publisher = req.body.publisher;
     var price = req.body.price;
     var imagelink = req.body.imagelink;
+    var totalRating = req.body.totalRating;
 
     var newBook = new Book({
         title: title,
@@ -61,12 +62,13 @@ router.post('/createBook',function (req,res) {
         isbn: isbn,
         publisher: publisher,
         price: price,
-        imagelink: imagelink
+        imagelink: imagelink,
+        totalRating: totalRating
     });
 
     Book.createBook(newBook, function (err, book) {
         if(err) throw err;
-        console.log(book);
+        //console.log(book);
         res.send(book);
     });
 
@@ -82,6 +84,21 @@ router.post('/',function (req,res) {
                 //console.log("==================="+books);
                 var len = false;
                 if (books.length == 0){
+                    len = true;
+                }
+                res.render('shop',{
+                    user: req.user,
+                    books: books,
+                    len: len,
+                    cartcount: cartMain.products.length
+                });
+            });
+            break;
+        case "rating":
+            Book.getBooksByRating(filter, function (err, books) {
+                if (err) throw err;
+                var len = false;
+                if(books.length == 0){
                     len = true;
                 }
                 res.render('shop',{

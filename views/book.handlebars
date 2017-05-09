@@ -101,10 +101,65 @@
 
                     </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                     <div class="book-title-main"><h4>{{title}}</h4></div>
                     <div class="book-author-main"><h5>{{author}}</h5></div>
                     <div class="book-price-main"><h5>$ {{price}}</h5></div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><strong>Add Review</strong></div>
+                        <div class="panel-body">
+                            <form method="post" action="/book/review">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="reviewComment" placeholder="Add a review" name="reviewComment"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-success active">
+                                            <input type="radio" name="rating" id="option1" autocomplete="off" checked value="5"> 5
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="rating" id="option2" autocomplete="off" value="4"> 4
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="rating" id="option3" autocomplete="off" value="3"> 3
+                                        </label>
+                                        <label class="btn btn-warning">
+                                            <input type="radio" name="rating" id="option4" autocomplete="off" value="2"> 2
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="rating" id="option5" autocomplete="off" value="1"> 1
+                                        </label>
+                                    </div>
+                                </div>
+
+                                    <input type="hidden" value="{{isbn}}" name="isbn">
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" >Submit Review</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    {{#each reviews}}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Posted By: <strong>{{reviewBy}}</strong>
+                            <label class="badge badgeRating">{{rating}}</label>
+                        </div>
+                        <div class="panel-body">
+                            {{comment}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary btn-block"  onclick="addToCart('{{_id}}')">Add to Cart</button>
+                    {{#if readOnline}}
+                        <button type="button" class="btn btn-success btn-block">Read Online</button>
+                    {{else}}
+                        <button type="button" class="btn btn-success btn-block">Buy Now</button>
+                    {{/if}}
                 </div>
 
             </div>

@@ -10,6 +10,15 @@ function submitFilter(filter) {
     filform.submit();
 }
 
+function submitRatingFilter(filter) {
+    var fil = document.getElementById("filter");
+    var criteria = document.getElementById("criteria");
+    var filform = document.getElementById("filterForm");
+    fil.value = filter;
+    criteria.value = "rating";
+    filform.submit();
+}
+
 function changeCategory(category) {
     var Category = document.getElementById("category");
     Category.innerHTML = category+" <span class='caret'></span>";
